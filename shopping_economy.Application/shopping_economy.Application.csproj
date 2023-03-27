@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\shopping_economy.Core\shopping_economy.Core.csproj" />
+    <ProjectReference Include="..\shopping_economy.Infrastructure\shopping_economy.Infrastructure.csproj" />
+    <ProjectReference Include="..\shopping_economy.Shared\shopping_economy.Shared.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>shopping_economy.Application</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
