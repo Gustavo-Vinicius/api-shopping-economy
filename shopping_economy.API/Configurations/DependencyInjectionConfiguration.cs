@@ -15,6 +15,7 @@ namespace shopping_economy.API.Configurations
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ILoginEmployeeRepository, LoginEmployeeRepository>();
             services.AddScoped<IStoreSetupRepository, StoreSetupRepository>();
+            services.AddScoped<ICreateListOfTheMonthRepository, CreateListOfTheMonthRepository>();
             services.AddMediatR(typeof(InserirProdutoCommand));
 
         }
