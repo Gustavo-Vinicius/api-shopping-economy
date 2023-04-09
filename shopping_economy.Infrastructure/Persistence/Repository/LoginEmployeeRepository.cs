@@ -1,6 +1,7 @@
 using shopping_economy.Core.Entities;
 using shopping_economy.Core.Interface;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace shopping_economy.Infrastructure.Persistence.Repository
 {
@@ -38,6 +39,20 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             var id = await _context.Employees.Select(x => x.Id).FirstOrDefaultAsync();
 
             return id;
+        }
+
+        public async Task TypeUserClientAsync(int id)
+        {
+           var query = "UPDATE employees SET people_type = 'CLIENTE' WHERE employees.id = @id";
+
+            await _context.Database.GetDbConnection().ExecuteAsync(query);
+        }
+
+        public async Task TypeUserEmployeeAsync(int id)
+        {
+            var query = "UPDATE employees SET people_type = 'FUNCIONARIO' WHERE employees.id = @id";
+
+            await _context.Database.GetDbConnection().ExecuteAsync(query);
         }
     }
 }

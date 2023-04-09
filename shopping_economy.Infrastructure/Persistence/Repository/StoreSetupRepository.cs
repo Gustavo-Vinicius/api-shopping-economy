@@ -1,3 +1,4 @@
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using shopping_economy.Core.DTOs;
 using shopping_economy.Core.Entities;
@@ -21,9 +22,11 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<StoreSetupDTO>> SearchListOfRegisteredStoreSetupAsync()
+        public async Task<IEnumerable<StoreSetupDTO>> SearchListOfRegisteredStoreSetupAsync()
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM store_setup";
+
+            return await _context.Database.GetDbConnection().QueryAsync<StoreSetupDTO>(query);
         }
 
         public async Task<int> GetIdAsync()
@@ -43,9 +46,13 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             throw new NotImplementedException();
         }
 
-        public Task DeleteStoreSetupAsync(int id)
+        public async Task DeleteStoreSetupAsync(int id)
         {
-            throw new NotImplementedException();
+             var selectStoreSetup = await _context.StoreSetups.SingleOrDefaultAsync(x => x.Id == id);
+
+            _context.Remove(selectStoreSetup);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

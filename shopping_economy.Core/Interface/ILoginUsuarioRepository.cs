@@ -12,5 +12,7 @@ namespace shopping_economy.Core.Interface
         Task<Employee> CheckIfEmployeeExistsAsync(Employee employee);
         Task<bool> CheckIfEmailAlreadyExistsAsync(string email);
         Task<int>BuscarIdAsync();
+        Task TypeUserClientAsync(int id);
+        Task TypeUserEmployeeAsync(int id);
     }
 }

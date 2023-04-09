@@ -35,9 +35,10 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             return product;
         }
 
-        public async Task<int> GetIdAsync()
+        public int GetIdAsync()
         {
-            var id = await _context.Products.Select(x => x.Id).FirstOrDefaultAsync();
+           var id = _context.Products.OrderByDescending(a => a.Id)
+                  .Select(p => p.Id).FirstOrDefault();
 
             return id;
         }

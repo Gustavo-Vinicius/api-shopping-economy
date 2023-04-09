@@ -21,6 +21,8 @@ namespace shopping_economy.Infrastructure
         public virtual DbSet<Product> Products { get; set; }
 
         public virtual DbSet<StoreSetup> StoreSetups { get; set; }
+        
+        public virtual DbSet<ShoppingList> ShoppingLists { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

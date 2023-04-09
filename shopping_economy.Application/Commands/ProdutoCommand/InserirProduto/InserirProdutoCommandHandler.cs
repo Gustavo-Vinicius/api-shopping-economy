@@ -16,7 +16,7 @@ namespace shopping_economy.Application.Commands.ProdutoCommand.InserirProduto
         public async Task<Unit> Handle(InserirProdutoCommand request, CancellationToken cancellationToken)
         {
 
-            var id = await _repository.GetIdAsync();
+            var id = _repository.GetIdAsync();
 
             if(id > 0){
                 id++;

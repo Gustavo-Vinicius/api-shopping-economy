@@ -18,8 +18,6 @@ namespace shopping_economy.Application.Commands.ClienteCommand.CadastrarUsuario
         {
             bool emailEmployeeExist = await _repository.CheckIfEmailAlreadyExistsAsync(request.Email);
 
-            // If
-
             var encryptedSenha = Cryptography.EncryptToSha256(request.Password);
 
             var id = await _repository.BuscarIdAsync();
@@ -46,6 +44,15 @@ namespace shopping_economy.Application.Commands.ClienteCommand.CadastrarUsuario
             };
 
             await _repository.RegisterEmployeeAsync(user);
+
+            if (String.IsNullOrEmpty(user.Office) && user.Salary == 0)
+            {
+                await _repository.TypeUserClientAsync(user.Id);
+            }
+            else
+            {
+                await _repository.TypeUserEmployeeAsync(user.Id);
+            }
 
             return Unit.Value;
         }

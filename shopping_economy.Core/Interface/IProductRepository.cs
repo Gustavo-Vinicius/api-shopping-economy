@@ -12,7 +12,7 @@ namespace shopping_economy.Core.Interface
         Task InsertProductAsync(Product product);
         Task<IEnumerable<ProductDTO>> SearchListOfRegisteredProductsAsync();
         Task<Product> SearchProductByIdAsync(int Id);
-        Task<int>GetIdAsync();
+        int GetIdAsync();
         Task ProductUpdateAsync(ProductDTO produto, int id);
         Task DeleteProductAsync(int id);
     
