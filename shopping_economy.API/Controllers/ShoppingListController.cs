@@ -16,7 +16,25 @@ namespace shopping_economy.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        /// <summary>
+        /// Register products to make the purchase of the month.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>A newly created product</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///        {
+        ///         "productName": "string",
+        ///         "date": "string",
+        ///         "price": 0,
+        ///         "totalPrice": 0,
+        ///         "clientId": 0
+        ///        }     
+        /// </remarks>
+        /// <response code="201">Add product for month</response>
+        [HttpPost("register-product-month")]
         public async Task<IActionResult> CreateListTheMonthAsync([FromBody] CreateListTheMonthCommand command)
         {
             await _mediator.Send(command);
@@ -24,6 +42,11 @@ namespace shopping_economy.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Compare the price of the list of products registered in the current month with the previous month.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> CompareListPricesAsync([FromQuery]CompareListPricesCommand command)
         {

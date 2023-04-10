@@ -19,11 +19,13 @@ namespace shopping_economy.API.Controllers
             _mediator = mediator;
         }
         /// <summary>
-        /// teste
+        /// Register a new user with your password and unique username
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [AllowAnonymous]
+        [ProducesResponseType(typeof(DefaultResponse), 200)]
+        [ProducesResponseType(typeof(DefaultResponse), 400)]
         [HttpPost("register-user")]
         public async Task<IActionResult> RegistrarUsuarioAsync([FromBody] CadastrarUsuarioCommand command)
         {
@@ -32,9 +34,15 @@ namespace shopping_economy.API.Controllers
             return Ok(new DefaultResponse("Successfully registered user ! "));
 
         }
-
+        /// <summary>
+        /// Generates a new access token to user
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("sign-in-user")]
+        [ProducesResponseType(typeof(SignInResponse), 200)]
+        [ProducesResponseType(typeof(DefaultResponse), 400)]
         public async Task<IActionResult> LoginDeUsuarioAsync([FromBody] SignInEmployeeCommand command)
         {
             string token = await _mediator.Send(command);

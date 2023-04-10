@@ -23,14 +23,37 @@ namespace shopping_economy.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateProductAsync([FromBody] StoreSetupCommand command)
+        /// <summary>
+        /// Add a new store to enter products.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>A newly created product</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///       {
+        ///         "productName": "string",
+        ///         "date": "string",
+        ///         "price": 0,
+        ///         "totalPrice": 0,
+        ///         "clientId": 0
+        ///       }       
+        /// </remarks>
+        /// <response code="201">Add new store</response>
+        /// <response code="400">This store is already created</response>
+        [HttpPost("add-new-store")]
+        public async Task<IActionResult> AddNewStoreAsync([FromBody] StoreSetupCommand command)
         {
             await _mediator.Send(command);
 
             return Ok();
         }
 
+        /// <summary>
+        /// Search registered stores.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetListingAsync()
         {
@@ -41,7 +64,12 @@ namespace shopping_economy.API.Controllers
             return Ok(getListingStoreSetup);
         }
 
-        [HttpDelete]
+        /// <summary>
+        /// Deletes a specific store.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpDelete("delete-store")]
         public async Task<IActionResult> DeleteStoreSetupAsync([FromQuery] DeleteStoreSetupCommand command)
         {
             await _mediator.Send(command);
