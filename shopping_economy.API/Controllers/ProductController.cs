@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using shopping_economy.Core.DTOs;
+using shopping_economy.Core.Models;
 
 namespace shopping_economy.API.Controllers
 {
@@ -61,11 +62,13 @@ namespace shopping_economy.API.Controllers
         [ProducesResponseType(typeof(ProductDTO), 200)]
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync()
+        public async Task<IActionResult> GetProductsAsync([FromQuery] DadosPaginacaoInputModel query)
         {
-            var query = new ObterListagemProdutosQuery();
+            var parameter = new ObterListagemProdutosQuery(query.PaginaAtual, query.ItensPorPagina);
 
-            return Ok(await _mediator.Send(query));
+            var products = await _mediator.Send(parameter);
+
+            return Ok(products);
         }
         
         /// <summary>

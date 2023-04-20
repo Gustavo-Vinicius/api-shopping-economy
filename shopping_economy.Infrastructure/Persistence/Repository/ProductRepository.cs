@@ -21,11 +21,11 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
 
             await _context.SaveChangesAsync();
         }
-        public async Task<IEnumerable<ProductDTO>> SearchListOfRegisteredProductsAsync()
+        public async Task<List<ProductDTO>> SearchListOfRegisteredProductsAsync(int inicio, int limit)
         {
-            var query = "SELECT * FROM Product";
+            var query = "SELECT * FROM Product limit @limit offset @inicio";
 
-            return await _context.Database.GetDbConnection().QueryAsync<ProductDTO>(query);
+            return (await _context.Database.GetDbConnection().QueryAsync<ProductDTO>(query, new { inicio, limit })).ToList();
         }
 
         public async Task<Product> SearchProductByIdAsync(int Id)
@@ -61,6 +61,13 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             _context.Remove(selectedProduct);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCountProductsAsync()
+        {
+            var query = "SELECT COUNT(*) FROM product";
+
+           return await _context.Database.GetDbConnection().QueryFirstOrDefaultAsync<int>(query);
         }
     }
 }

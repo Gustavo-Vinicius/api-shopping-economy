@@ -10,11 +10,13 @@ namespace shopping_economy.Core.Interface
     public interface IProductRepository
     {
         Task InsertProductAsync(Product product);
-        Task<IEnumerable<ProductDTO>> SearchListOfRegisteredProductsAsync();
+        Task<List<ProductDTO>> SearchListOfRegisteredProductsAsync(int inicio, int limit);
         Task<Product> SearchProductByIdAsync(int Id);
         int GetIdAsync();
         Task ProductUpdateAsync(ProductDTO produto, int id);
         Task DeleteProductAsync(int id);
+
+        Task<int>GetCountProductsAsync();
     
     }
 }
