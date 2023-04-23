@@ -12,8 +12,8 @@ namespace shopping_economy.Core.Interface
         int GetIdAsync();
         Task<int> GetStockTheProductAsync(string name); 
         Task ProductInventoryUpdateAsync(string name, int newStock);
-        Task<decimal> SearchTotalPriceOfTheCurrentMonthAsync(string currentMonth);
-        Task<decimal> SearchTotalPriceOfTheLastMonthAsync(string lastMonth);
+        Task<decimal> SearchTotalPriceOfTheCurrentMonthAsync(string currentMonth, int client_id);
+        Task<decimal> SearchTotalPriceOfTheLastMonthAsync(string lastMonth, int client_id);
 
 
     }

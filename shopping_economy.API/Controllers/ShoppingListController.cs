@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using shopping_economy.Application.Commands.ListOfTheMonthCommand.CompareListPrices;
 using shopping_economy.Application.Commands.ListOfTheMonthCommand.CreateListTheMonth;
+using shopping_economy.Application.Queries.ListOfTheMonthCommand.CompareListPrices;
 
 namespace shopping_economy.API.Controllers
 {
@@ -48,7 +48,7 @@ namespace shopping_economy.API.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> CompareListPricesAsync([FromQuery]CompareListPricesCommand command)
+        public async Task<IActionResult> CompareListPricesAsync([FromQuery]CompareListPricesQuery command)
         {
             var result = await _mediator.Send(command);
 

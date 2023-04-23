@@ -45,18 +45,18 @@ namespace shopping_economy.Infrastructure.Persistence.Repository
             await _context.Database.GetDbConnection().ExecuteAsync(queryUpdate, new { name, newStock });
         }
 
-        public async Task<decimal> SearchTotalPriceOfTheCurrentMonthAsync(string currentMonth)
+        public async Task<decimal> SearchTotalPriceOfTheCurrentMonthAsync(string currentMonth, int client_id)
         {
-           var query = "SELECT Sum(total_price) FROM shopping_list WHERE shopping_list.date = @currentMonth";
+           var query = "SELECT Sum(total_price) FROM shopping_list WHERE shopping_list.date = @currentMonth AND client_id = @client_id";
 
-           return await _context.Database.GetDbConnection().QueryFirstOrDefaultAsync<decimal>(query, new {currentMonth});
+           return await _context.Database.GetDbConnection().QueryFirstOrDefaultAsync<decimal>(query, new { currentMonth, client_id });
         }
 
-        public async Task<decimal> SearchTotalPriceOfTheLastMonthAsync(string lastMonth)
+        public async Task<decimal> SearchTotalPriceOfTheLastMonthAsync(string lastMonth, int client_id)
         {
-            var query = "SELECT Sum(total_price) FROM shopping_list WHERE shopping_list.date = @lastMonth";
+            var query = "SELECT Sum(total_price) FROM shopping_list WHERE shopping_list.date = @lastMonth AND client_id = @client_id";
 
-           return await _context.Database.GetDbConnection().QueryFirstOrDefaultAsync<decimal>(query, new {lastMonth});
+           return await _context.Database.GetDbConnection().QueryFirstOrDefaultAsync<decimal>(query, new { lastMonth, client_id });
         }
     }
 }

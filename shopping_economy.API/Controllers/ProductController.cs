@@ -62,9 +62,9 @@ namespace shopping_economy.API.Controllers
         [ProducesResponseType(typeof(ProductDTO), 200)]
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetProductsAsync([FromQuery] DadosPaginacaoInputModel query)
+        public async Task<IActionResult> GetProductsAsync([FromQuery] PaginationDataInputModel query)
         {
-            var parameter = new ObterListagemProdutosQuery(query.PaginaAtual, query.ItensPorPagina);
+            var parameter = new ObterListagemProdutosQuery(query.Currentpage, query.ItemsPerPage);
 
             var products = await _mediator.Send(parameter);
 

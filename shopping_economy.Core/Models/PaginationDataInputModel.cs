@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace shopping_economy.Core.Models
 {
-    public class DadosPaginacaoInputModel
+    public class PaginationDataInputModel
     {
-        public int PaginaAtual { get; set; }
+        public int Currentpage { get; set; }
 
-        public int ItensPorPagina { get; set; }
+        public int ItemsPerPage { get; set; }
 
     }
 }

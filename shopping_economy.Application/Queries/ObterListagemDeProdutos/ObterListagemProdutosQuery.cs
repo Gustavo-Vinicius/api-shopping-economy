@@ -8,15 +8,15 @@ using shopping_economy.Core.Models;
 
 namespace shopping_economy.Application.Queries.ObterListagemDeProdutos
 {
-    public class ObterListagemProdutosQuery: IRequest<RetornoPaginacaoModel<ProductDTO>>
+    public class ObterListagemProdutosQuery: IRequest<PaginationReturnModel<ProductDTO>>
     {
-        public int PaginaAtual { get; }
-        public int ItensPorPagina { get; }
+        public int CurrentPage { get; }
+        public int ItemsPerPage { get; }
 
-        public ObterListagemProdutosQuery(int paginaAtual, int itensPorPagina)
+        public ObterListagemProdutosQuery(int currentPage, int itemsPerPage)
         {
-            PaginaAtual = paginaAtual;
-            ItensPorPagina = itensPorPagina;
+            CurrentPage = currentPage;
+            ItemsPerPage = itemsPerPage;
         }
 
     }

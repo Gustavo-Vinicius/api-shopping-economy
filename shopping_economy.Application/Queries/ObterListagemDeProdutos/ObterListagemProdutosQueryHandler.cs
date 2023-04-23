@@ -10,7 +10,7 @@ using shopping_economy.Shared.Utils;
 
 namespace shopping_economy.Application.Queries.ObterListagemDeProdutos
 {
-    public class ObterListagemProdutosQueryHandler : IRequestHandler<ObterListagemProdutosQuery,RetornoPaginacaoModel<ProductDTO>>
+    public class ObterListagemProdutosQueryHandler : IRequestHandler<ObterListagemProdutosQuery,PaginationReturnModel<ProductDTO>>
     {
         private readonly IProductRepository _repository;
 
@@ -19,26 +19,26 @@ namespace shopping_economy.Application.Queries.ObterListagemDeProdutos
             _repository = repository;
         }
 
-        public async Task<RetornoPaginacaoModel<ProductDTO>> Handle(ObterListagemProdutosQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationReturnModel<ProductDTO>> Handle(ObterListagemProdutosQuery request, CancellationToken cancellationToken)
         {
            int totalproducts = await _repository.GetCountProductsAsync();
 
            List<ProductDTO> totalProductsList = await _repository.SearchListOfRegisteredProductsAsync(
-            request.PaginaAtual,
-            request.ItensPorPagina
+            request.CurrentPage,
+            request.ItemsPerPage
            );
 
-            PaginacaoModel paginacao = Extensions.ObterPaginacao(
-                request.PaginaAtual,
-                request.ItensPorPagina,
+            PaginationModel pagination = Extensions.ObterPaginacao(
+                request.CurrentPage,
+                request.ItemsPerPage,
                 totalproducts
             );
 
-            return new RetornoPaginacaoModel<ProductDTO>(
-                paginacao.Pagina,
-                paginacao.ItensPorPagina,
-                paginacao.TotalDePaginas,
-                paginacao.TotalDeRegistros,
+            return new PaginationReturnModel<ProductDTO>(
+                pagination.Page,
+                pagination.ItemsPerPage,
+                pagination.TotalPage,
+                pagination.TotalRecords,
                 totalProductsList
             );
 
